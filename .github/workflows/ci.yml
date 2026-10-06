@@ -1,4 +1,4 @@
-# Description: CI for the pdp-router public mirror.
+# Description: CI for the Sibyl public mirror (package pdp_router).
 # Description: Proves the package installs and tests green standalone (no private deps).
 
 name: ci

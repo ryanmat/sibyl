@@ -1,14 +1,14 @@
-# pdp-router
+# Sibyl
 
 An outcome-fed router for heterogeneous AI models: a confidence cascade, a
 Thompson Sampling bandit, and a multi-model panel behind two OpenAI-compatible
 surfaces.
 
-[![ci](https://github.com/ryanmat/pdp-router/actions/workflows/ci.yml/badge.svg)](https://github.com/ryanmat/pdp-router/actions/workflows/ci.yml)
+[![ci](https://github.com/ryanmat/sibyl/actions/workflows/ci.yml/badge.svg)](https://github.com/ryanmat/sibyl/actions/workflows/ci.yml)
 
 ## Overview
 
-pdp-router sits behind an OpenAI-compatible endpoint and decides, per request,
+Sibyl sits behind an OpenAI-compatible endpoint and decides, per request,
 which model answers. A cheap classifier scores request complexity. A confidence
 cascade starts at the cheapest capable model and escalates only when confidence
 is low; with `ROUTING_MODE=bandit`, Thompson Sampling over per-model,
@@ -19,11 +19,17 @@ against outcomes you care about, write the results back to a SQLite trust DB,
 and the trust weights and posteriors reshape future routing. With no trust DB,
 it routes on the static cascade.
 
-LiteLLM and OpenRouter are gateways: many models behind one API. pdp-router is
-a smaller, more opinionated thing built on the same idea: a learned router with
-a measured feedback loop. If you want a gateway, use those. If you want a
-router that logs its decisions and improves from graded outcomes, this is a
-reference implementation of that, extracted from a production system.
+LiteLLM and OpenRouter are gateways: many models behind one API. Sibyl is a
+smaller, more opinionated thing built on the same idea: a learned router with a
+measured feedback loop. If you want a gateway, use those. If you want a router
+that logs its decisions and improves from graded outcomes, this is a reference
+implementation of that, extracted from a production system.
+
+This repository is the public face of Sibyl's routing core and mirrors the
+package as it is built internally. The Python package and its entry point keep
+their original names, `pdp_router` and `pdp-router-proxy`, from the PDP
+(Parallel Distributed Processing) architecture the router grew out of; they
+rename at a later major version, and the repository name moved first.
 
 The roster is thirteen models across six training lineages: Anthropic (Opus,
 Sonnet, Haiku), Google (Gemini Pro, Flash, Flash-Lite), Meta Llama 4 (Scout
@@ -79,7 +85,7 @@ flowchart TD
 Python 3.11 to 3.13.
 
 ```bash
-git clone https://github.com/ryanmat/pdp-router && cd pdp-router
+git clone https://github.com/ryanmat/sibyl && cd sibyl
 cp .env.example .env          # add one provider key
 uv sync --all-extras
 ```
@@ -183,7 +189,7 @@ dependency, just two variables:
 
 ```bash
 OTEL_EXPORTER_OTLP_ENDPOINT=https://api.smith.langchain.com/otel
-OTEL_EXPORTER_OTLP_HEADERS=x-api-key=<your-key>,Langsmith-Project=pdp-router
+OTEL_EXPORTER_OTLP_HEADERS=x-api-key=<your-key>,Langsmith-Project=sibyl
 ```
 
 Traces carry the routing decision, token usage, latency, and cost per arm.

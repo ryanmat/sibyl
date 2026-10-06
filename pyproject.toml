@@ -1,10 +1,10 @@
-# Description: PDP routing intelligence -- public mirror build manifest.
+# Description: Sibyl routing core -- public mirror build manifest (package pdp_router).
 # Description: Owned by the mirror (not synced); omits private-only deps. Version follows upstream on bump.
 
 [project]
 name = "pdp-router"
 version = "0.9.1"
-description = "Outcome-fed routing across heterogeneous AI models: confidence cascade, Thompson Sampling bandit, multi-model panel"
+description = "Sibyl: outcome-fed routing across heterogeneous AI models. Confidence cascade, Thompson Sampling bandit, multi-model panel"
 readme = "README.md"
 license = { text = "Apache-2.0" }
 authors = [{ name = "Ryan Matuszewski" }]
@@ -37,8 +37,8 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/ryanmat/pdp-router"
-Issues = "https://github.com/ryanmat/pdp-router/issues"
+Repository = "https://github.com/ryanmat/sibyl"
+Issues = "https://github.com/ryanmat/sibyl/issues"
 
 [project.optional-dependencies]
 gemini = ["google-genai>=1.0.0"]
